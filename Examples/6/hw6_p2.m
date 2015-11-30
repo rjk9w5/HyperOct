@@ -1,7 +1,7 @@
 % 
 % 
 
-addpath('/home/ryan/workspace/Hypersonics/HyperOct/Subroutines/')
+addpath('../Subroutines/')
 P = 12044.6;
 r = 0.193674;
 T = 216.65;
