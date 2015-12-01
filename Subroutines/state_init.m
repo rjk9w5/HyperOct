@@ -1,37 +1,38 @@
 function [state] = state_init(varargin)
-%==============================================================================%
-%   Author: Ryan Krattiger                                                     %
-%==============================================================================%
-%   Inputs:                                                                    %
-%       varargin -> Options List                                               %
-%   Options:                                                                   %
-%       "Mach"          ->  Mach number input flag                             %
-%       "Temperature"   ->  Mach number input flag                             %
-%       "TempTotal"     ->  Mach number input flag                             %
-%       "Pressure"      ->  Mach number input flag                             %
-%       "PresTotal"     ->  Mach number input flag                             %
-%       "Density"       ->  Mach number input flag                             %
-%       "DensTotal"     ->  Mach number input flag                             %
-%       "Velocity"      ->  Mach number input flag                             %
-%       "VelocityVec"   ->  Mach number input flag                             %
-%       "SpecRatio"     ->  Mach number input flag                             %
-%       "CP"            ->  Mach number input flag                             %
-%       "CV"            ->  Mach number input flag                             %
-%       "Energy"        ->  Mach number input flag                             %
-%       "EnergyTotal"   ->  Mach number input flag                             %
-%       "Enthalpy"      ->  Mach number input flag                             %
-%       "EnthalpyTotal" ->  Mach number input flag                             %
-%       "Entropy"       ->  Mach number input flag                             %
-%       "SoS"           ->  Mach number input flag                             %
-%       "Units"         ->  Flag for units: 1 -> Imperial, 0 -> SI             %
-%   Default values for all varibles are in conditions of STP at sea level with % 
-%       zero velocity                                                          %
-%------------------------------------------------------------------------------%
-%   Ouptus:                                                                    %
-%       state:      structure of flow state variables                          %
-%==============================================================================%
+%===============================================================================%
+%   Author: Ryan Krattiger                                                      %
+%===============================================================================%
+%   Inputs:                                                                     %
+%       varargin -> Options List                                                %
+%   Options:                                                                    %
+%       'Mach'          ->                                                      %
+%       'Temperature'   ->                                                      %
+%       'TempTotal'     ->                                                      %
+%       'Pressure'      ->                                                      %
+%       'PresTotal'     ->                                                      %
+%       'Density'       ->                                                      %
+%       'DensTotal'     ->                                                      %
+%       'Velocity'      ->                                                      %
+%       'VelocityVec'   ->                                                      %
+%       'SpecRatio'     ->                                                      %
+%       'CP'            ->                                                      %
+%       'CV'            ->                                                      %
+%       'Viscosity'     ->                                                      %
+%       'Energy'        ->                                                      %
+%       'EnergyTotal'   ->                                                      %
+%       'Enthalpy'      ->                                                      %
+%       'EnthalpyTotal' ->                                                      %
+%       'Entropy'       ->                                                      %
+%       'SoS'           ->  Speed of sound                                      %
+%       'Units'         ->  Flag for units: 1 -> Imperial, 0 -> SI              %
+%   Default values for all varibles are in conditions of STP at sea level with  % 
+%       zero velocity                                                           %
+%-------------------------------------------------------------------------------%
+%   Ouptus:                                                                     %
+%       state:      structure of flow state variables                           %
+%===============================================================================%
 
-% Example: var = state_init("Mach", 4, "Temperature", 600) 
+% Example: var = state_init('Mach', 4, 'Temperature', 600) 
 %   sets var.M = 4 & var.T = 600, all other values remain default
 if(nargin == 0)
     flag = 0;
@@ -47,8 +48,9 @@ state.V = 0;     % velocity magnitude [m/s]
 state.V_(1:3) = [0 0 0]; % velocity vector [m/s]
 state.M = 0;     % Mach number
 state.gma = 1.4;   % specific heat ratio
-state.cp = 1005.4;    % specific heat -> constant pressure [J/K]
+state.cp = 1004.5;    % specific heat -> constant pressure [J/K]
 state.cv = state.cp/1.4;    % specific heat -> constant volume [J/K]
+state.mu = 1.716*10^-5; % Viscosity coefficient
 state.e = state.cv*state.T;     % energy per unit mass [J/kg]
 state.et = state.e;
 state.h = state.cp*state.T;     % enthalpy per unit mass [J/kg]
@@ -84,6 +86,8 @@ for i = 1:2:nargin
             state.cp = cell2mat(varargin(i+1));    % specific heat -> constant pressure [J/K]
         case 'CV'
             state.cv = cell2mat(varargin(i+1));    % specific heat -> constant volume [J/K]
+        case 'Viscosity'
+            state.mu = cell2mat(varargin(i+1));    % specific heat -> constant volume [J/K]
         case 'Energy'
             state.e = cell2mat(varargin(i+1));     % energy per unit mass [J/kg]
         case 'EnergyTotal'

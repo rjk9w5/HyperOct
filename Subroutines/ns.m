@@ -18,10 +18,9 @@ if(nargin > 1)
 
             r2r1 = ((gmma + 1) * M ^ 2 * sin(B) ^ 2) / ((gmma - 1) * ...
                 M ^ 2 * sin(B) ^ 2 + 2);
-            M = ((gmma-1)*M^2 + 2) / (2*gmma*M^2 - (gmma-1));
+            M = ((gmma - 1)*M ^2 + 2) / ((2*gmma*M^2) - (gmma - 1));
         case 'Equillibrium' % Thermo-Chemical Equillibrium
             [p2p1, r2r1, ~, T2T1, dstate] = equil_ns(ustate);
-            dstate;
         case 'HSP' % Hypersonic Similarity Parameter
             fprintf('Error: Option not available')
         case 'HL' % Hypersonic Limit
@@ -31,13 +30,13 @@ if(nargin > 1)
         otherwise
             fprintf('Error: Invalid option \n')
             fprintf('Valid options are: \n')
-            fprintf('1.\t\"CPG\"\n')
-            fprintf('2.\t\"Equillibrium\"\n')
-            fprintf('3.\t\HSP\"\n')
-            fprintf('4.\t\"HSL\"\n')
-            fprintf('5.\t\"HSL+S\"')
+            fprintf('1.\t"CPG"\n')
+            fprintf('2.\t"Equillibrium"\n')
+            fprintf('3.\t"HSP"\n')
+            fprintf('4.\t"HSL\"\n')
+            fprintf('5.\t"HSL+S"')
     end %switch
 else
-    fprintf('Error: No option specified\n')
+    fprintf('ns: No option specified\n')
     fprintf('Exiting...\n')
 end %if

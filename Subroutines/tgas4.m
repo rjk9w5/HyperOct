@@ -187,7 +187,7 @@ elseif Y>=-7.0 && Y<=-4.50
         c11=-2.250;
     end
 else
-    fprintf('Inputs of Range')
+    fprintf('Inputs out of Range')
 end
 gamma=c1+c2*Y+c3*Z+c4*Y*Z+(c5+c6*Y+c7*Z+c8*Y*Z)/(1+exp(c9*(X+c10*Y+c11)));
 h=p/rho*(gamma/(gamma-1));

@@ -150,7 +150,7 @@ elseif (Y>=-7.0) && (Y<=-4.50)
         c12=-2.47;
     end
 else
-    fprintf('Inputs of Range')
+    fprintf('Inputs out of Range')
 end
 if Z<0.30
     T=p/(rho*287);

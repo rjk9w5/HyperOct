@@ -11,10 +11,10 @@ if opt
     cell2mat(varargin(opt))
     for i = 1:1:opt
         switch(cell2mat(varargin(i)))
-            case "ShowConverge"
+            case 'ShowConverge'
                 scplot = 1;
             otherwise
-                fprintf("Error: Invalid option\n")
+                error('equil_obs: Invalid option\n')
         end
     end
 end

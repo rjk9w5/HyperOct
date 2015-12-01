@@ -15,7 +15,7 @@ if opt
             case 'ShowConverge'
                 scplot = 1;
             otherwise
-                fprintf('Error: Invalid option\n')
+                error('equil_ns: Invalid option\n')
         end
     end
 end
@@ -72,7 +72,7 @@ while err < delta
     end
     it = it + 1;
     if(it>100 || imag(fepso))
-        fprintf('Error: Could not converge to a valid solution\n')
+        error('equil_ns: Could not converge to a valid solution\n')
         err = 1;
         break;
     end
@@ -93,4 +93,3 @@ dstate.h = h2_;
 dstate.T = T;
 dstate.V = u2;
 dstate.M = u2/a;
-dstate;

@@ -1,7 +1,7 @@
 % 
 % 
 
-addpath('../Subroutines/')
+addpath('../../Subroutines/')
 P = 12044.6;
 r = 0.193674;
 T = 216.65;
@@ -23,7 +23,7 @@ Tt2 = T2*TT;
 rt2 = r2*TT^(1/(1.4-1));
 estate = state_init('Pressure', pt2, 'Temperature', Tt2, 'Density', rt2);
 
-qdot = qdot_stag(st, estate, 2000, 0.15);
+qdot = qdot_stag(st, estate, 2000, 0.15)
 
 [~, ~, ~, ~, estate_e] = ns(st,'Equillibrium');
 
@@ -32,7 +32,7 @@ estate_e.M;
 estate_e.p = estate_e.p*(TT)^(1.4/(1.4-1));
 estate_e.T = estate_e.T*TT;
 estate_e.r = estate_e.r*TT^(1/(1.4-1));
-[p, s, rho, e, a, h, T] = tgasM(2, estate_e.p, estate_e.p/(287*2000));
-wstate = state_init('Pressure', p, 'Temperature', T, 'Density', rho, 'Enthalpy', h, 'Entropy', s, 'Energy', e, 'SoS', a);
+[p, s, r, e, a, h, T] = tgasM(2, estate_e.p, estate_e.p/(287*2000));
+wstate = state_init('Pressure', p, 'Temperature', T , 'Density', r, 'Enthalpy', h, 'CP', h/T);
 
 qdot = equill_qdot_stag(st, estate_e, wstate, 0.15)
